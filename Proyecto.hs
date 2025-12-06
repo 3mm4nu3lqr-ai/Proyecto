@@ -100,9 +100,10 @@ busca Void _ = False
 busca (Node x h) y = (x == y) || orList (mapBusqueda h y)
     
 -- Función que recibe un árbol y devuelve la suma de todos sus elementos.
-sumaElementos :: Num a => Arbol a -> a
+sumaElementos :: Arbol Prop -> Int
 sumaElementos Void = 0
-sumaElementos (Node x h) = x + sumaList2 (mapSuma h)
+sumaElementos (Node _ h) =
+    1 + sumaList2 (mapSuma h)
 
 -- Función preorden
 preorden :: Arbol a -> [a]
@@ -155,7 +156,7 @@ orList :: [Bool] -> Bool -- Calcula el OR lógico de todos los valores en una li
 orList [] = False
 orList (b:bs) = b || orList bs
 
-mapSuma :: Num a => [Arbol a] -> [a] -- Aplica la función sumaElementos a cada subárbol
+mapSuma ::[Arbol Prop] -> [Int] -- Aplica la función sumaElementos a cada subárbol
 mapSuma [] = []
 mapSuma (w:ws) = sumaElementos w : mapSuma ws
 
